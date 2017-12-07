@@ -24,35 +24,48 @@ namespace WindowsFormsApp1
         {
             if (Start.Text == "Start")
             {
-
-                if (minin.Value != 0 || secin.Value != 0)
+                if (radioButton2.Checked == true)
                 {
+                    groupBox1.Enabled = false;
                     Start.Text = "Pause";
-                    minin.Enabled = false;
-                    secin.Enabled = false;
-                  
                     timer1 = new System.Windows.Forms.Timer();
-                    counter = (int)secin.Value;
-                    int m = (int)minin.Value;
-                    if (m < 10)
-                        minout.Text = "0" + m.ToString();
-                    else
-                        minout.Text = m.ToString();
-
                     Stop.Enabled = true;
-                    timer1.Tick += new EventHandler(timer1_Tick);
-                    timer1.Interval = 1000; 
+                    timer1.Tick += new EventHandler(timer1_Tick2);
+                    timer1.Interval = 1000;
                     timer1.Start();
+                }
+                else
+                {
+                    if (minin.Value != 0 || secin.Value != 0)
+                    {
+                        groupBox1.Enabled = false;
+                        Start.Text = "Pause";
+                        minin.Enabled = false;
+                        secin.Enabled = false;
+
+                        timer1 = new System.Windows.Forms.Timer();
+                        counter = (int)secin.Value;
+                        int m = (int)minin.Value;
+                        if (m < 10)
+                            minout.Text = "0" + m.ToString();
+                        else
+                            minout.Text = m.ToString();
+
+                        Stop.Enabled = true;
+                        timer1.Tick += new EventHandler(timer1_Tick);
+                        timer1.Interval = 1000;
+                        timer1.Start();
 
 
-                    if (secin.Value < 10)
-                        secout.Text = "0" + counter.ToString();
-                    else
-                        secout.Text = counter.ToString();
-                    if (secin.Value < 10)
-                        secout.Text = "0" + counter.ToString();
-                    else
-                        secout.Text = counter.ToString();
+                        if (secin.Value < 10)
+                            secout.Text = "0" + counter.ToString();
+                        else
+                            secout.Text = counter.ToString();
+                        if (secin.Value < 10)
+                            secout.Text = "0" + counter.ToString();
+                        else
+                            secout.Text = counter.ToString();
+                    }
                 }
             }
             else if (Start.Text == "Pause")
@@ -101,7 +114,8 @@ namespace WindowsFormsApp1
                 secin.Enabled = true;
                 Stop.Enabled = false;
                 Start.Enabled = true;
-                
+                groupBox1.Enabled = true;
+
             }
             else if (counter == 0)
             {
@@ -134,8 +148,8 @@ namespace WindowsFormsApp1
                 Start.Enabled = true;
                 timer1.Stop();
                 counter = 0;
-             
-            
+                groupBox1.Enabled = true;
+
                 Stop.Enabled = false;
                 minin.Enabled = true;
                 secin.Enabled = true;
@@ -148,6 +162,62 @@ namespace WindowsFormsApp1
 
         }
 
-        
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked == true)
+            {
+                minin.Visible = false;
+                secin.Visible = false;
+            }
+            else
+            {
+                minin.Visible = true;
+                secin.Visible = true;
+            }
+           
+        }
+        private void timer1_Tick2(object sender, EventArgs e)
+        {
+
+            if (int.Parse(minout.Text) == 999 && int.Parse(secout.Text) == 59)
+            {
+
+                minout.Text = "00";
+                secout.Text = "00";
+                Start.Text = "Start";
+                minout.BackColor = Color.White;
+                secout.BackColor = Color.White;
+                timer1.Stop();
+                minin.Enabled = true;
+                secin.Enabled = true;
+                Stop.Enabled = false;
+                Start.Enabled = true;
+                groupBox1.Enabled = true;
+
+            }
+            else if (counter == 59)
+            {
+                int m = int.Parse(minout.Text) + 1;
+                if (m < 10)
+                    minout.Text = "0" + m.ToString();
+                else
+                    minout.Text = m.ToString();
+                counter = 0;
+                secout.Text = "0"+counter.ToString();
+            }
+            else
+            {
+                counter++;
+
+                if (counter < 10)
+                    secout.Text = "0" + counter.ToString();
+                else
+                    secout.Text = counter.ToString();
+
+            }
+
+        }
+
+      
     }
 }
