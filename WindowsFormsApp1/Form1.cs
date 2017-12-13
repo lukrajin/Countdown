@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
             {
                 if (radioButton2.Checked == true)
                 {
+                    
                     groupBox1.Enabled = false;
                     Start.Text = "Pause";
                     timer1 = new System.Windows.Forms.Timer();
@@ -168,11 +169,17 @@ namespace WindowsFormsApp1
             {
                 minin.Visible = false;
                 secin.Visible = false;
+                listBox1.Visible = true;
+                button1.Visible = true;
+                button2.Visible = true;
             }
             else
             {
                 minin.Visible = true;
                 secin.Visible = true;
+                listBox1.Visible = false;
+                button1.Visible =false;
+                button2.Visible = false;
             }
            
         }
@@ -218,6 +225,26 @@ namespace WindowsFormsApp1
 
         }
 
-      
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            listBox1.Items.Add(minout.Text +":" +secout.Text);
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button2.Enabled = listBox1.SelectedIndex != -1;
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
+
+     
     }
 }
