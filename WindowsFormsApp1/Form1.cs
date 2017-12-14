@@ -22,61 +22,57 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Start.Text == "Start")
+            if (start.Text == "Start")
             {
-                if (radioButton2.Checked == true)
+                if (stopwatch.Checked == true)
                 {
                     
-                    groupBox1.Enabled = false;
-                    Start.Text = "Pause";
+                    mode.Enabled = false;
+                    start.Text = "Pause";
                     timer1 = new System.Windows.Forms.Timer();
-                    Stop.Enabled = true;
+                    stop.Enabled = true;
+                    add.Enabled = true;
                     timer1.Tick += new EventHandler(timer1_Tick2);
                     timer1.Interval = 1000;
                     timer1.Start();
                 }
                 else
                 {
-                    if (minin.Value != 0 || secin.Value != 0)
-                    {
-                        groupBox1.Enabled = false;
-                        Start.Text = "Pause";
-                        minin.Enabled = false;
-                        secin.Enabled = false;
+                   
+                    mode.Enabled = false;
+                    start.Text = "Pause";
+                    minin.Enabled = false;
+                    secin.Enabled = false;
 
-                        timer1 = new System.Windows.Forms.Timer();
-                        counter = (int)secin.Value;
-                        int m = (int)minin.Value;
-                        if (m < 10)
-                            minout.Text = "0" + m.ToString();
-                        else
-                            minout.Text = m.ToString();
+                    timer1 = new System.Windows.Forms.Timer();
+                    counter = (int)secin.Value;
+                    int m = (int)minin.Value;
+                    if (m < 10)
+                        minout.Text = "0" + m.ToString();
+                    else
+                        minout.Text = m.ToString();
 
-                        Stop.Enabled = true;
-                        timer1.Tick += new EventHandler(timer1_Tick);
-                        timer1.Interval = 1000;
-                        timer1.Start();
+                    stop.Enabled = true;
+                    timer1.Tick += new EventHandler(timer1_Tick);
+                    timer1.Interval = 1000;
+                    timer1.Start();
 
-
-                        if (secin.Value < 10)
-                            secout.Text = "0" + counter.ToString();
-                        else
-                            secout.Text = counter.ToString();
-                        if (secin.Value < 10)
-                            secout.Text = "0" + counter.ToString();
-                        else
-                            secout.Text = counter.ToString();
-                    }
+                    if (secin.Value < 10)
+                        secout.Text = "0" + counter.ToString();
+                    else
+                        secout.Text = counter.ToString();
                 }
             }
-            else if (Start.Text == "Pause")
+            else if (start.Text == "Pause")
             {
-                Start.Text = "Continue";
+                start.Text = "Continue";
+               
                 timer1.Stop();
             }
-            else if (Start.Text == "Continue")
+            else if (start.Text == "Continue")
             {
-                Start.Text = "Pause";
+                start.Text = "Pause";
+                add.Enabled = true;
                 timer1.Start();
             }
 
@@ -107,15 +103,15 @@ namespace WindowsFormsApp1
                 
                 minout.Text = "00";
                 secout.Text = "00";
-                Start.Text = "Start";
+                start.Text = "Start";
                 minout.BackColor = Color.White;
                 secout.BackColor = Color.White;
                 timer1.Stop();
                 minin.Enabled = true;
                 secin.Enabled = true;
-                Stop.Enabled = false;
-                Start.Enabled = true;
-                groupBox1.Enabled = true;
+                stop.Enabled = false;
+                start.Enabled = true;
+                mode.Enabled = true;
 
             }
             else if (counter == 0)
@@ -145,13 +141,14 @@ namespace WindowsFormsApp1
         {
 
 
-                Start.Text = "Start";
-                Start.Enabled = true;
+                start.Text = "Start";
+                start.Enabled = true;
                 timer1.Stop();
                 counter = 0;
-                groupBox1.Enabled = true;
+                mode.Enabled = true;
+                add.Enabled = false;
 
-                Stop.Enabled = false;
+                stop.Enabled = false;
                 minin.Enabled = true;
                 secin.Enabled = true;
                 minout.Text = "00";
@@ -165,41 +162,47 @@ namespace WindowsFormsApp1
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked == true)
+            if (stopwatch.Checked == true)
             {
                 minin.Visible = false;
                 secin.Visible = false;
-                listBox1.Visible = true;
-                button1.Visible = true;
-                button2.Visible = true;
+                times.Visible = true;
+                add.Visible = true;
+                delete.Visible = true;
+                start.Enabled = true;
             }
             else
             {
                 minin.Visible = true;
                 secin.Visible = true;
-                listBox1.Visible = false;
-                button1.Visible =false;
-                button2.Visible = false;
+                times.Visible = false;
+                add.Visible =false;
+                delete.Visible = false;
+                secin_ValueChanged(sender, e);
+
+
+
             }
            
         }
         private void timer1_Tick2(object sender, EventArgs e)
         {
-
+        
             if (int.Parse(minout.Text) == 999 && int.Parse(secout.Text) == 59)
             {
 
                 minout.Text = "00";
                 secout.Text = "00";
-                Start.Text = "Start";
+                start.Text = "Start";
                 minout.BackColor = Color.White;
                 secout.BackColor = Color.White;
                 timer1.Stop();
                 minin.Enabled = true;
                 secin.Enabled = true;
-                Stop.Enabled = false;
-                Start.Enabled = true;
-                groupBox1.Enabled = true;
+                stop.Enabled = false;
+                start.Enabled = true;
+                mode.Enabled = true;
+                add.Enabled = false;
 
             }
             else if (counter == 59)
@@ -227,24 +230,47 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            listBox1.Items.Add(minout.Text +":" +secout.Text);
+           
+            times.Items.Add((times.Items.Count+1) + ". "+minout.Text + ":" + secout.Text);
+
+          
+            add.Enabled = start.Text != "Continue";
+
+
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            int index = times.SelectedIndex;
+            times.Items.RemoveAt(index);
+            for(int i = index; i < times.Items.Count; i++)
+            {
+
+                string s = times.Items[index].ToString();
+                s=s.Substring(s.IndexOf(" ") + 1);
+                times.Items.RemoveAt(index);
+                s = (i+1) + ". " + s;
+                times.Items.Add(s);
+                
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            button2.Enabled = listBox1.SelectedIndex != -1;
+            delete.Enabled = times.SelectedIndex != -1;
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            times.Items.Clear();
+            delete.Enabled = false;
         }
 
-     
+        private void secin_ValueChanged(object sender, EventArgs e)
+        {
+          
+            start.Enabled = secin.Value != 0 || minin.Value != 0;
+
+        }
     }
 }

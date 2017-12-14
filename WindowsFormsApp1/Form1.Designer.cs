@@ -29,48 +29,49 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Start = new System.Windows.Forms.Button();
-            this.Stop = new System.Windows.Forms.Button();
+            this.start = new System.Windows.Forms.Button();
+            this.stop = new System.Windows.Forms.Button();
             this.minout = new System.Windows.Forms.TextBox();
             this.secout = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.minin = new System.Windows.Forms.NumericUpDown();
             this.secin = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.mode = new System.Windows.Forms.GroupBox();
+            this.stopwatch = new System.Windows.Forms.RadioButton();
+            this.countdown = new System.Windows.Forms.RadioButton();
+            this.times = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.add = new System.Windows.Forms.Button();
+            this.delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.minin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secin)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.mode.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Start
+            // start
             // 
-            this.Start.Location = new System.Drawing.Point(38, 150);
-            this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(91, 35);
-            this.Start.TabIndex = 1;
-            this.Start.Text = "Start";
-            this.Start.UseVisualStyleBackColor = true;
-            this.Start.Click += new System.EventHandler(this.button1_Click);
+            this.start.Enabled = false;
+            this.start.Location = new System.Drawing.Point(38, 150);
+            this.start.Name = "start";
+            this.start.Size = new System.Drawing.Size(91, 35);
+            this.start.TabIndex = 1;
+            this.start.Text = "Start";
+            this.start.UseVisualStyleBackColor = true;
+            this.start.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Stop
+            // stop
             // 
-            this.Stop.Enabled = false;
-            this.Stop.Location = new System.Drawing.Point(135, 150);
-            this.Stop.Name = "Stop";
-            this.Stop.Size = new System.Drawing.Size(91, 35);
-            this.Stop.TabIndex = 2;
-            this.Stop.Text = "Stop";
-            this.Stop.UseVisualStyleBackColor = true;
-            this.Stop.Click += new System.EventHandler(this.button2_Click);
+            this.stop.Enabled = false;
+            this.stop.Location = new System.Drawing.Point(135, 150);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(91, 35);
+            this.stop.TabIndex = 2;
+            this.stop.Text = "Stop";
+            this.stop.UseVisualStyleBackColor = true;
+            this.stop.Click += new System.EventHandler(this.button2_Click);
             // 
             // minout
             // 
@@ -131,6 +132,7 @@
             this.minin.Size = new System.Drawing.Size(90, 29);
             this.minin.TabIndex = 8;
             this.minin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.minin.ValueChanged += new System.EventHandler(this.secin_ValueChanged);
             // 
             // secin
             // 
@@ -145,107 +147,108 @@
             this.secin.Size = new System.Drawing.Size(90, 29);
             this.secin.TabIndex = 9;
             this.secin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.secin.ValueChanged += new System.EventHandler(this.secin_ValueChanged);
             // 
-            // groupBox1
+            // mode
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 191);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(245, 58);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Mode";
+            this.mode.Controls.Add(this.stopwatch);
+            this.mode.Controls.Add(this.countdown);
+            this.mode.Location = new System.Drawing.Point(12, 191);
+            this.mode.Name = "mode";
+            this.mode.Size = new System.Drawing.Size(245, 58);
+            this.mode.TabIndex = 10;
+            this.mode.TabStop = false;
+            this.mode.Text = "Mode";
             // 
-            // radioButton2
+            // stopwatch
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(91, 35);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(76, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Stopwatch";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.stopwatch.AutoSize = true;
+            this.stopwatch.Location = new System.Drawing.Point(91, 35);
+            this.stopwatch.Name = "stopwatch";
+            this.stopwatch.Size = new System.Drawing.Size(76, 17);
+            this.stopwatch.TabIndex = 1;
+            this.stopwatch.Text = "Stopwatch";
+            this.stopwatch.UseVisualStyleBackColor = true;
+            this.stopwatch.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
-            // radioButton1
+            // countdown
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 35);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(79, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Countdown";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.countdown.AutoSize = true;
+            this.countdown.Checked = true;
+            this.countdown.Location = new System.Drawing.Point(6, 35);
+            this.countdown.Name = "countdown";
+            this.countdown.Size = new System.Drawing.Size(79, 17);
+            this.countdown.TabIndex = 0;
+            this.countdown.TabStop = true;
+            this.countdown.Text = "Countdown";
+            this.countdown.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // times
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ContextMenuStrip = this.contextMenuStrip1;
-            this.listBox1.Location = new System.Drawing.Point(39, 115);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(90, 30);
-            this.listBox1.TabIndex = 11;
-            this.listBox1.Visible = false;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(135, 114);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 32);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(185, 114);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(41, 32);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "-";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.times.ContextMenuStrip = this.contextMenuStrip1;
+            this.times.FormattingEnabled = true;
+            this.times.Location = new System.Drawing.Point(39, 115);
+            this.times.Name = "times";
+            this.times.Size = new System.Drawing.Size(90, 30);
+            this.times.TabIndex = 11;
+            this.times.Visible = false;
+            this.times.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
-        
+            this.contextMenuStrip1.Size = new System.Drawing.Size(102, 26);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
+            // add
+            // 
+            this.add.Enabled = false;
+            this.add.Location = new System.Drawing.Point(135, 114);
+            this.add.Name = "add";
+            this.add.Size = new System.Drawing.Size(41, 32);
+            this.add.TabIndex = 12;
+            this.add.Text = "+";
+            this.add.UseVisualStyleBackColor = true;
+            this.add.Visible = false;
+            this.add.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // delete
+            // 
+            this.delete.Enabled = false;
+            this.delete.Location = new System.Drawing.Point(185, 114);
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(41, 32);
+            this.delete.TabIndex = 13;
+            this.delete.Text = "-";
+            this.delete.UseVisualStyleBackColor = true;
+            this.delete.Visible = false;
+            this.delete.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(264, 261);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.delete);
+            this.Controls.Add(this.add);
+            this.Controls.Add(this.times);
+            this.Controls.Add(this.mode);
             this.Controls.Add(this.secin);
             this.Controls.Add(this.minin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.secout);
             this.Controls.Add(this.minout);
-            this.Controls.Add(this.Stop);
-            this.Controls.Add(this.Start);
+            this.Controls.Add(this.stop);
+            this.Controls.Add(this.start);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(280, 300);
@@ -254,8 +257,8 @@
             this.Text = "Timer";
             ((System.ComponentModel.ISupportInitialize)(this.minin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secin)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.mode.ResumeLayout(false);
+            this.mode.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -264,20 +267,20 @@
 
         #endregion
         
-        private System.Windows.Forms.Button Start;
-        private System.Windows.Forms.Button Stop;
+        private System.Windows.Forms.Button start;
+        private System.Windows.Forms.Button stop;
         private System.Windows.Forms.TextBox minout;
         private System.Windows.Forms.TextBox secout;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown minin;
         private System.Windows.Forms.NumericUpDown secin;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox mode;
+        private System.Windows.Forms.RadioButton stopwatch;
+        private System.Windows.Forms.RadioButton countdown;
+        private System.Windows.Forms.ListBox times;
+        private System.Windows.Forms.Button add;
+        private System.Windows.Forms.Button delete;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
     }
